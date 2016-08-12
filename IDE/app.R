@@ -2,8 +2,8 @@ library(shiny)
 library(haven)
 library(data.table)
 
-table_stock <- read_sas(paste0(getwd(),"/Data_IDE/stocks_dgtpe_00_15_20160628.sas7bdat"))
-table_stock <- dplyr::select(table_stock,-1:-4,-6,-7,-9,-10,-12,-13,-15)
+table_stock <- fread(paste0(getwd(),"/Data_IDE/table_stock.csv"), stringsAsFactors = FALSE, drop = 1)
+
 #crée les character pour la selection 
 pays <- unique(table_stock$ZONE_GEO_CPIE_VF)
 operation <- unique(table_stock$TYPE_OPERATION_VF)
