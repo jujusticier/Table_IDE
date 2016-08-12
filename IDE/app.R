@@ -1,8 +1,6 @@
 library(shiny)
-library(haven)
-library(data.table)
 
-table_stock <- fread(paste0(getwd(),"/Data_IDE/table_stock.csv"), stringsAsFactors = FALSE, drop = 1)
+table_stock <- data.table::fread(paste0(getwd(),"/Data_IDE/table_stock.csv"), stringsAsFactors = FALSE, drop = 1,encoding = "Latin-1")
 
 #crée les character pour la selection 
 pays <- unique(table_stock$ZONE_GEO_CPIE_VF)
@@ -62,6 +60,9 @@ server <- shinyServer(function(input, output) {
     
   }))
 })
+
+# Lance l'application 
+shinyApp(ui = ui, server = server)
 
 # Lance l'application 
 shinyApp(ui = ui, server = server)
