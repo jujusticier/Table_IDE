@@ -33,17 +33,16 @@ ui <- shinyUI(fluidPage(
          )
       ),
       
-      # Show a plot of the generated distribution
+      # Tableau comme élément principal de la page
       mainPanel(
         DT::dataTableOutput("table")
       )
    )
 ))
 
-# Define server logic required to draw a histogram
+# Cote serveur
 server <- shinyServer(function(input, output) {
 
-  
   output$table <- DT::renderDataTable(DT::datatable({
     data <- table_stock
     if (input$Pays != "All") {
@@ -58,10 +57,13 @@ server <- shinyServer(function(input, output) {
     if (input$Secteur != "All") {
       data <- data[data$SECTEUR_ACTIVITE_VF == input$Secteur,]
     }
+    
     data
+    
   }))
 })
 
-# Run the application 
+# Lance l'application 
 shinyApp(ui = ui, server = server)
+
 
